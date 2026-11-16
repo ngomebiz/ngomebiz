@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="0.85" cy="0" r="0.9"><stop offset="0" stop-color="#06B6D4" stop-opacity="0.45"/><stop offset="1" stop-color="#06B6D4" stop-opacity="0"/></radialGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06B6D4"/><stop offset="1" stop-color="#0E7490"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0B1622"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g transform="translate(80 80)">
+    <rect width="64" height="64" rx="18" fill="url(#g)"/>
+    <path transform="scale(2)" fill="#fff" d="M8 25V12h3V8.5h3V12h4V8.5h3V12h3v13h-6.2v-4.3a1.8 1.8 0 0 0-3.6 0V25Z"/>
+    <text x="84" y="46" font-family="Outfit, Helvetica, Arial, sans-serif" font-size="40" font-weight="700" fill="#fff">NgomeBiz</text>
+  </g>
+  <text font-family="Outfit, Helvetica, Arial, sans-serif" font-weight="700" fill="#fff" font-size="64">
+    <tspan x="80" y="290">Professional invoices</tspan>
+    <tspan x="80" y="368">and <tspan fill="#22D3EE">tax-ready books</tspan>,</tspan>
+    <tspan x="80" y="446">from your phone.</tspan>
+  </text>
+  <text x="80" y="540" font-family="Outfit, Helvetica, Arial, sans-serif" font-size="28" fill="#A3B3C4">Built for TRA &amp; ZRA VAT  ·  Tanzania Mainland · Zanzibar</text>
+  <g transform="translate(870 150)">
+    <rect width="250" height="330" rx="22" fill="#13202E" stroke="#24384D"/>
+    <text x="24" y="48" font-family="Outfit, Helvetica, Arial, sans-serif" font-size="18" fill="#A3B3C4">INV-0142</text>
+    <rect x="24" y="72" width="202" height="10" rx="5" fill="#24384D"/>
+    <rect x="24" y="96" width="150" height="10" rx="5" fill="#24384D"/>
+    <text x="24" y="170" font-family="Outfit, Helvetica, Arial, sans-serif" font-size="18" fill="#A3B3C4">VAT (18/118)</text>
+    <text x="226" y="170" text-anchor="end" font-family="Outfit, Helvetica, Arial, sans-serif" font-size="18" fill="#fff">180,000</text>
+    <line x1="24" y1="196" x2="226" y2="196" stroke="#24384D"/>
+    <text x="24" y="236" font-family="Outfit, Helvetica, Arial, sans-serif" font-size="18" fill="#A3B3C4">Total</text>
+    <text x="226" y="272" text-anchor="end" font-family="Outfit, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#fff">TSh 1,180,000</text>
+    <rect x="24" y="292" width="64" height="22" rx="11" fill="#22C55E" fill-opacity="0.2"/>
+    <text x="56" y="308" text-anchor="middle" font-family="Outfit, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#4ADE80">PAID</text>
+  </g>
+</svg>

@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NgomeBiz: Invoices and tax-ready books from your phone</title>
+  <meta name="description" content="NgomeBiz is the invoicing app for small businesses in Tanzania Mainland and Zanzibar. Create professional invoices, get VAT right for TRA or ZRA, track payments and stock, and keep your records safe, even offline.">
+  <link rel="canonical" href="https://ngomebiz.com/">
+  <meta name="theme-color" content="#F0F4F8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0B1622" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NgomeBiz">
+  <meta property="og:title" content="NgomeBiz: Professional invoices and tax-ready books, from your phone">
+  <meta property="og:description" content="Invoices in seconds, VAT done right for TRA and ZRA, payments by M-Pesa, Tigo Pesa and Airtel Money. Works offline, backed up to the cloud.">
+  <meta property="og:url" content="https://ngomebiz.com/">
+  <meta property="og:image" content="https://ngomebiz.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NgomeBiz app showing an invoice for TSh 1,180,000 with VAT extracted per line">
+  <meta property="og:locale" content="en_TZ">
+  <meta property="og:locale:alternate" content="sw_TZ">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NgomeBiz: Professional invoices and tax-ready books, from your phone">
+  <meta name="twitter:description" content="The invoicing app for small businesses in Tanzania Mainland and Zanzibar. Built for TRA and ZRA VAT.">
+  <meta name="twitter:image" content="https://ngomebiz.com/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NgomeBiz",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Android, iOS",
+    "description": "Mobile invoicing and business management for small businesses in Tanzania Mainland and Zanzibar.",
+    "areaServed": [{ "@type": "Place", "name": "Tanzania Mainland" }, { "@type": "Place", "name": "Zanzibar" }],
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TZS" }
+  }
+  </script>
+
+  <!-- Apply saved theme and language before first paint (no flash) -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try {
+        var t = localStorage.getItem("ngome-theme");
+        if (t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches) d.classList.add("dark");
+        var l = localStorage.getItem("ngome-lang");
+        if (l === "sw") d.setAttribute("data-lang", "sw");
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body class="min-h-screen overflow-x-hidden">
+
+<!-- Icon sprite (Lucide, ISC licence) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" class="absolute size-0 overflow-hidden" aria-hidden="true" focusable="false">
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="m17 15-5.5 5.5L9 18"/><path d="M5 17.743A7 7 0 1 1 15.71 10h1.79a4.5 4.5 0 0 1 1.5 8.742"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/></symbol>
+  <!-- Brand marks -->
+  <symbol id="logo-apple" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></symbol>
+  <symbol id="logo-play" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></symbol>
+  <symbol id="logo-ngome" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="url(#g-ngome)" stroke="none"/><path fill="#fff" stroke="none" d="M8 25V12h3V8.5h3V12h4V8.5h3V12h3v13h-6.2v-4.3a1.8 1.8 0 0 0-3.6 0V25Z"/></symbol>
+  <linearGradient id="g-ngome" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06B6D4"/><stop offset="1" stop-color="#0E7490"/></linearGradient>
+</svg>
+
+<a href="#main" class="sr-only z-50 rounded-lg bg-surface px-4 py-2 focus:not-sr-only focus:fixed focus:top-3 focus:left-3">Skip to content</a>
+
+<!-- ============ Header ============ -->
+<header class="sticky top-0 z-40 border-b border-line/70 bg-bg/85 backdrop-blur-md">
+  <div class="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
+    <a href="#top" class="flex items-center gap-2 text-xl font-bold" aria-label="NgomeBiz home">
+      <svg class="size-8" aria-hidden="true"><use href="#logo-ngome"/></svg>
+      NgomeBiz
+    </a>
+    <nav aria-label="Main" class="ml-6 hidden md:block">
+      <ul class="flex gap-6 text-[0.95rem] text-muted">
+        <li><a class="hover:text-fg" href="#features"><span data-l="en">Features</span><span data-l="sw" lang="sw">Vipengele</span></a></li>
+        <li><a class="hover:text-fg" href="#how"><span data-l="en">How it works</span><span data-l="sw" lang="sw">Inavyofanya kazi</span></a></li>
+        <li><a class="hover:text-fg" href="#pricing"><span data-l="en">Pricing</span><span data-l="sw" lang="sw">Bei</span></a></li>
+        <li><a class="hover:text-fg" href="#faq"><span data-l="en">FAQ</span><span data-l="sw" lang="sw">Maswali</span></a></li>
+      </ul>
+    </nav>
+    <div class="ml-auto flex items-center gap-1.5 sm:gap-2">
+      <button type="button" id="lang-toggle" class="min-h-11 rounded-lg px-2.5 text-sm font-semibold text-muted hover:bg-surface-2 hover:text-fg" aria-label="Switch language to Kiswahili">
+        <span data-l="en" aria-hidden="true">SW</span><span data-l="sw" aria-hidden="true">EN</span>
+      </button>
+      <button type="button" id="theme-toggle" class="grid size-11 place-items-center rounded-lg text-muted hover:bg-surface-2 hover:text-fg" aria-label="Switch to dark mode">
+        <svg class="icon size-5 dark:hidden" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="icon hidden size-5 dark:block" aria-hidden="true"><use href="#i-sun"/></svg>
+      </button>
+      <a href="#download" class="btn-primary whitespace-nowrap px-3 text-sm sm:px-5"><span data-l="en">Get the app</span><span data-l="sw" lang="sw">Pakua</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ 1. Hero ============ -->
+<section id="top" class="relative isolate overflow-hidden">
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[radial-gradient(60rem_30rem_at_85%_-10%,rgb(6_182_212/0.22),transparent_70%),radial-gradient(40rem_30rem_at_-10%_110%,rgb(14_116_144/0.16),transparent_70%)]"></div>
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 pt-12 pb-16 sm:px-6 md:grid-cols-[1.1fr_1fr] md:pt-20 md:pb-24">
+    <div>
+      <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-sm font-semibold text-fg">
+        <svg class="icon size-4 text-gain-fg" aria-hidden="true"><use href="#i-shield"/></svg>
+        <span data-l="en">Built for TRA &amp; ZRA VAT</span>
+        <span data-l="sw" lang="sw">Imejengwa kwa VAT ya TRA na ZRA</span>
+      </p>
+      <h1 class="text-[2.35rem] leading-[1.08] sm:text-5xl lg:text-6xl">
+        <span data-l="en">Professional invoices and <span class="bg-gradient-to-r from-teal to-teal-deep bg-clip-text text-transparent dark:from-cyan dark:to-[#67e8f9]">tax-ready books</span>, from your phone.</span>
+        <span data-l="sw" lang="sw">Ankara za kitaalamu na <span class="bg-gradient-to-r from-teal to-teal-deep bg-clip-text text-transparent dark:from-cyan dark:to-[#67e8f9]">hesabu tayari kwa kodi</span>, kutoka simuni mwako.</span>
+      </h1>
+      <p class="mt-5 max-w-xl text-lg text-muted">
+        <span data-l="en">NgomeBiz takes its name from <i lang="sw">ngome</i>, Swahili for “fortress”. It keeps your business records safe, accurate and ready for the taxman. No more receipt books, lost WhatsApp messages or late-night Excel.</span>
+        <span data-l="sw" lang="sw">NgomeBiz inalinda kumbukumbu za biashara yako: salama, sahihi na tayari kwa TRA au ZRA. Hakuna tena vitabu vya risiti, ujumbe wa WhatsApp uliopotea wala Excel usiku wa manane.</span>
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#" class="store-btn" data-store="ios">
+          <svg aria-hidden="true"><use href="#logo-apple"/></svg>
+          <span><small><span data-l="en">Download on the</span><span data-l="sw" lang="sw">Pakua kwenye</span></small><strong>App Store</strong></span>
+        </a>
+        <a href="#" class="store-btn" data-store="android">
+          <svg aria-hidden="true"><use href="#logo-play"/></svg>
+          <span><small><span data-l="en">Get it on</span><span data-l="sw" lang="sw">Ipate kwenye</span></small><strong>Google Play</strong></span>
+        </a>
+      </div>
+      <p class="mt-5 text-sm text-muted">
+        <span data-l="en">Free during early access · Works offline · Tanzania Mainland &amp; Zanzibar</span>
+        <span data-l="sw" lang="sw">Bure kipindi cha mwanzo · Inafanya kazi bila intaneti · Tanzania Bara na Zanzibar</span>
+      </p>
+    </div>
+
+    <!-- Hero phone: invoice -->
+    <div class="relative">
+      <div class="phone" role="img" aria-label="NgomeBiz app showing invoice INV-0142 for Mama Neema Supplies: two lines totalling TSh 1,180,000, of which VAT is TSh 180,000, a part payment of TSh 500,000 received by M-Pesa, and a button to share the PDF on WhatsApp.">
+        <div class="screen">
+          <div class="flex items-center justify-between px-4">
+            <div>
+              <p class="text-[0.65rem] text-slate-500">Invoice</p>
+              <p class="text-sm font-bold">INV-0142</p>
+            </div>
+            <span class="chip chip-open">Issued</span>
+          </div>
+          <div class="mx-3 mt-3 rounded-xl bg-white p-3 shadow-sm">
+            <p class="text-[0.62rem] text-slate-500">Bill to</p>
+            <p class="font-semibold">Mama Neema Supplies</p>
+            <p class="text-[0.62rem] text-slate-500">Kariakoo, Dar es Salaam · 16 Nov 2026</p>
+          </div>
+          <div class="mx-3 mt-2 space-y-2 rounded-xl bg-white p-3 shadow-sm">
+            <div class="flex justify-between gap-2">
+              <div><p class="font-semibold">Drinking water 500ml</p><p class="text-[0.62rem] text-slate-500">40 ctn × 11,800 · VAT 72,000</p></div>
+              <p class="font-semibold tabular-nums">472,000</p>
+            </div>
+            <div class="flex justify-between gap-2">
+              <div><p class="font-semibold">Sugar 25 kg</p><p class="text-[0.62rem] text-slate-500">6 bags × 118,000 · VAT 108,000</p></div>
+              <p class="font-semibold tabular-nums">708,000</p>
+            </div>
+            <div class="space-y-1 border-t border-dashed border-slate-300 pt-2 text-[0.66rem] text-slate-600">
+              <div class="flex justify-between"><span>Net of VAT</span><span class="tabular-nums">1,000,000</span></div>
+              <div class="flex justify-between"><span>VAT (18/118)</span><span class="tabular-nums">180,000</span></div>
+            </div>
+            <div class="flex items-baseline justify-between border-t border-slate-200 pt-2">
+              <span class="font-semibold">Total</span><span class="text-base font-bold tabular-nums">TSh 1,180,000</span>
+            </div>
+          </div>
+          <div class="mx-3 mt-2 flex items-center justify-between rounded-xl bg-white px-3 py-2 text-[0.62rem] shadow-sm">
+            <span class="text-slate-500">Draft</span><span class="h-px flex-1 mx-1 bg-slate-300"></span>
+            <span class="font-bold text-[#0e5f75]">Issued</span><span class="h-px flex-1 mx-1 bg-slate-300"></span>
+            <span class="text-slate-500">Paid</span>
+          </div>
+          <div class="mx-3 mt-2 flex items-center gap-2 rounded-xl bg-white p-2.5 shadow-sm">
+            <span class="grid size-6 place-items-center rounded-full bg-gain/20 text-[#146c34]"><svg class="icon size-3.5"><use href="#i-check"/></svg></span>
+            <div class="flex-1"><p class="font-semibold">TSh 500,000 received</p><p class="text-[0.6rem] text-slate-500">M-Pesa · 16 Nov · Balance 680,000</p></div>
+          </div>
+          <div class="mt-auto p-3">
+            <div class="flex items-center justify-center gap-1.5 rounded-xl bg-teal-deep py-2.5 font-semibold text-white">
+              <svg class="icon size-4" aria-hidden="true"><use href="#i-chat"/></svg> Share PDF on WhatsApp
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Floating confirmation -->
+      <div aria-hidden="true" class="absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-xl border border-line bg-surface px-3 py-2 text-sm shadow-lg sm:left-auto sm:right-0 sm:translate-x-0 lg:-right-2">
+        <span class="grid size-7 place-items-center rounded-full bg-cyan/15 text-accent"><svg class="icon size-4"><use href="#i-cloud"/></svg></span>
+        <span><span class="block font-semibold">Backed up</span><span class="block text-xs text-muted">Synced to the cloud</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. Problem → solution ============ -->
+<section aria-labelledby="problem-title" class="bg-ink py-16 text-[#e8eff6] md:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <p class="eyebrow !text-cyan">Why NgomeBiz</p>
+    <h2 id="problem-title" class="mt-3 max-w-2xl text-3xl sm:text-4xl">Your business deserves better than a receipt book.</h2>
+    <ul class="mt-10 grid gap-4 md:grid-cols-3">
+      <li class="rounded-[var(--radius-card)] bg-ink-2 p-6 ring-1 ring-white/10">
+        <div class="flex items-center gap-3 text-[#a3b3c4]">
+          <svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg>
+          <h3 class="text-base font-semibold">Handwritten receipts</h3>
+        </div>
+        <p class="mt-2 text-[#a3b3c4]">Carbon copies fade, sums go wrong and customers can’t read them.</p>
+        <div class="mt-5 border-t border-white/10 pt-5">
+          <p class="flex items-center gap-2 font-semibold text-cyan"><svg class="icon size-5" aria-hidden="true"><use href="#i-arrow"/></svg>With NgomeBiz</p>
+          <p class="mt-1.5">A clean, branded PDF invoice in under a minute, sent straight to WhatsApp.</p>
+        </div>
+      </li>
+      <li class="rounded-[var(--radius-card)] bg-ink-2 p-6 ring-1 ring-white/10">
+        <div class="flex items-center gap-3 text-[#a3b3c4]">
+          <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+          <h3 class="text-base font-semibold">Tax-time panic</h3>
+        </div>
+        <p class="mt-2 text-[#a3b3c4]">Digging through notebooks at month end, guessing at the VAT.</p>
+        <div class="mt-5 border-t border-white/10 pt-5">
+          <p class="flex items-center gap-2 font-semibold text-cyan"><svg class="icon size-5" aria-hidden="true"><use href="#i-arrow"/></svg>With NgomeBiz</p>
+          <p class="mt-1.5">VAT is worked out on every invoice. Your monthly tax report is always ready.</p>
+        </div>
+      </li>
+      <li class="rounded-[var(--radius-card)] bg-ink-2 p-6 ring-1 ring-white/10">
+        <div class="flex items-center gap-3 text-[#a3b3c4]">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+          <h3 class="text-base font-semibold">Phone breaks, records gone</h3>
+        </div>
+        <p class="mt-2 text-[#a3b3c4]">A dropped phone shouldn’t cost you a year of sales history.</p>
+        <div class="mt-5 border-t border-white/10 pt-5">
+          <p class="flex items-center gap-2 font-semibold text-cyan"><svg class="icon size-5" aria-hidden="true"><use href="#i-arrow"/></svg>With NgomeBiz</p>
+          <p class="mt-1.5">Everything is backed up to the cloud. Sign in on a new phone and it’s all there.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 3. Features ============ -->
+<section id="features" aria-labelledby="features-title" class="py-16 md:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <p class="eyebrow">Features</p>
+    <h2 id="features-title" class="mt-3 max-w-2xl text-3xl sm:text-4xl">Everything your business runs on, in one app.</h2>
+
+    <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Two featured cards span wider on large screens -->
+      <article class="card p-6 lg:col-span-2">
+        <div class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></div>
+        <h3 class="mt-4 text-xl">Invoices in seconds</h3>
+        <p class="mt-2 text-muted">Move each invoice from Draft to Issued to Paid. Share it as a PDF over WhatsApp or email, or duplicate last week’s order in one tap.</p>
+        <div class="mt-4 flex flex-wrap items-center gap-1.5 text-xs" aria-hidden="true">
+          <span class="chip bg-surface-2 text-muted">Draft</span><svg class="icon size-3.5 text-muted"><use href="#i-right"/></svg>
+          <span class="chip chip-open">Issued</span><svg class="icon size-3.5 text-muted"><use href="#i-right"/></svg>
+          <span class="chip chip-paid">Paid</span>
+        </div>
+      </article>
+      <article class="card p-6 lg:col-span-2">
+        <div class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-percent"/></svg></div>
+        <h3 class="mt-4 text-xl">Tax done right</h3>
+        <p class="mt-2 text-muted">VAT is extracted from each line’s gross price and rounded per line: 18/118 on the Mainland, 15/115 in Zanzibar. Your totals match what TRA or ZRA expects, to the shilling.</p>
+        <p class="mt-4 rounded-lg bg-surface-2 px-3 py-2 text-sm tabular-nums">40 × TSh 11,800 = TSh 472,000 → <strong>VAT TSh 72,000</strong> <span class="text-muted">(18%)</span></p>
+      </article>
+      <article class="card p-6">
+        <div class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></div>
+        <h3 class="mt-4 text-lg">Tax period tracking</h3>
+        <p class="mt-2 text-muted">Each month is marked Open, Review or Filed. Filed periods lock, so nobody can change them later.</p>
+      </article>
+      <article class="card p-6">
+        <div class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-wallet"/></svg></div>
+        <h3 class="mt-4 text-lg">Payments</h3>
+        <p class="mt-2 text-muted">Record full or partial payments by cash, bank or mobile money: M-Pesa, Tigo Pesa and Airtel Money.</p>
+      </article>
+      <article class="card p-6">
+        <div class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-package"/></svg></div>
+        <h3 class="mt-4 text-lg">Stock tracking</h3>
+        <p class="mt-2 text-muted">Stock goes down automatically when you issue an invoice, and every movement is recorded.</p>
+      </article>
+      <article class="card p-6">
+        <div class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></div>
+        <h3 class="mt-4 text-lg">Clients and products</h3>
+        <p class="mt-2 text-muted">Save your customers and product catalogue once. Pick them in a tap on every new invoice.</p>
+      </article>
+      <article class="card p-6 lg:col-span-2">
+        <div class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></div>
+        <h3 class="mt-4 text-lg">Expenses and insights</h3>
+        <p class="mt-2 text-muted">Log expenses as they happen. See revenue, expense and tax reports at a glance, and export tax reports as PDF for your accountant, TRA or ZRA.</p>
+      </article>
+      <article class="card p-6 lg:col-span-2">
+        <div class="icon-chip"><svg class="icon" aria-hidden="true"><use href="#i-cloud"/></svg></div>
+        <h3 class="mt-4 text-lg">Works offline, backed up to the cloud</h3>
+        <p class="mt-2 text-muted">Your data lives on your phone, so NgomeBiz works with no signal. When you’re online it syncs to the cloud and across your devices.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. How it works ============ -->
+<section id="how" aria-labelledby="how-title" class="border-y border-line bg-surface py-16 md:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <p class="eyebrow">How it works</p>
+    <h2 id="how-title" class="mt-3 text-3xl sm:text-4xl">Up and running in five minutes.</h2>
+    <ol class="mt-10 grid gap-8 md:grid-cols-3">
+      <li class="relative">
+        <span class="grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-cyan to-teal-deep text-xl font-bold text-white" aria-hidden="true">1</span>
+        <h3 class="mt-4 text-xl">Set up your business</h3>
+        <p class="mt-2 text-muted">Add your business name, TIN and logo, and choose Mainland or Zanzibar VAT. Import or add your products and customers.</p>
+      </li>
+      <li class="relative">
+        <span class="grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-cyan to-teal-deep text-xl font-bold text-white" aria-hidden="true">2</span>
+        <h3 class="mt-4 text-xl">Create your first invoice</h3>
+        <p class="mt-2 text-muted">Pick a customer, add items, and NgomeBiz does the VAT. Issue it and share the PDF on WhatsApp.</p>
+      </li>
+      <li class="relative">
+        <span class="grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-cyan to-teal-deep text-xl font-bold text-white" aria-hidden="true">3</span>
+        <h3 class="mt-4 text-xl">Get paid, file with confidence</h3>
+        <p class="mt-2 text-muted">Record payments as they come in. At month end, your tax report is ready and waiting.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 5. Screenshots carousel ============ -->
+<section aria-labelledby="screens-title" class="py-16 md:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex items-end justify-between gap-4">
+      <div>
+        <p class="eyebrow">Inside the app</p>
+        <h2 id="screens-title" class="mt-3 text-3xl sm:text-4xl">Clear screens. No accounting degree needed.</h2>
+      </div>
+      <div class="hidden shrink-0 gap-2 sm:flex" data-carousel-controls>
+        <button type="button" class="grid size-11 place-items-center rounded-full border border-line bg-surface hover:bg-surface-2 disabled:opacity-40" data-carousel-prev aria-label="Previous screen"><svg class="icon size-5" aria-hidden="true"><use href="#i-left"/></svg></button>
+        <button type="button" class="grid size-11 place-items-center rounded-full border border-line bg-surface hover:bg-surface-2 disabled:opacity-40" data-carousel-next aria-label="Next screen"><svg class="icon size-5" aria-hidden="true"><use href="#i-right"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-6xl" role="region" aria-roledescription="carousel" aria-label="App screenshots">
+    <ul id="carousel" class="no-scrollbar mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-6 sm:px-6 lg:justify-between" tabindex="0">
+      <!-- Home -->
+      <li class="shrink-0 snap-center" aria-roledescription="slide" aria-label="1 of 4: Home">
+        <div class="phone" role="img" aria-label="Home screen: revenue this month TSh 4,820,000, unpaid invoices TSh 1,180,000, and a list of recent invoices.">
+          <div class="screen px-3">
+            <p class="text-slate-500">Habari, Asha</p>
+            <p class="text-sm font-bold">Asha Hardware</p>
+            <div class="mt-3 rounded-xl bg-gradient-to-br from-teal to-teal-deep p-3 text-white">
+              <p class="text-[0.62rem] opacity-90">Revenue · November</p>
+              <p class="text-lg font-bold tabular-nums">TSh 4,820,000</p>
+              <p class="text-[0.62rem] opacity-90">▲ 12% vs October</p>
+            </div>
+            <div class="mt-2 grid grid-cols-2 gap-2">
+              <div class="rounded-xl bg-white p-2.5 shadow-sm"><p class="text-[0.6rem] text-slate-500">Unpaid</p><p class="font-bold tabular-nums">1,180,000</p></div>
+              <div class="rounded-xl bg-white p-2.5 shadow-sm"><p class="text-[0.6rem] text-slate-500">VAT this month</p><p class="font-bold tabular-nums">735,254</p></div>
+            </div>
+            <p class="mt-3 mb-1.5 font-semibold">Recent invoices</p>
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between rounded-lg bg-white p-2 shadow-sm"><span>Mama Neema Supplies</span><span class="chip chip-open">Issued</span></div>
+              <div class="flex items-center justify-between rounded-lg bg-white p-2 shadow-sm"><span>Juma Builders</span><span class="chip chip-paid">Paid</span></div>
+              <div class="flex items-center justify-between rounded-lg bg-white p-2 shadow-sm"><span>Upendo Kiosk</span><span class="chip chip-paid">Paid</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="mt-4 text-center font-semibold">Home</p>
+      </li>
+      <!-- Invoice -->
+      <li class="shrink-0 snap-center" aria-roledescription="slide" aria-label="2 of 4: Invoice">
+        <div class="phone" role="img" aria-label="New invoice screen with a customer selected, two products added from the catalogue, and a total of TSh 1,180,000 including VAT.">
+          <div class="screen px-3">
+            <p class="text-sm font-bold">New invoice</p>
+            <div class="mt-3 rounded-xl bg-white p-2.5 shadow-sm"><p class="text-[0.6rem] text-slate-500">Customer</p><p class="font-semibold">Mama Neema Supplies</p></div>
+            <p class="mt-3 mb-1.5 font-semibold">Items</p>
+            <div class="space-y-1.5">
+              <div class="flex justify-between rounded-lg bg-white p-2 shadow-sm"><span>Drinking water ×40</span><span class="tabular-nums">472,000</span></div>
+              <div class="flex justify-between rounded-lg bg-white p-2 shadow-sm"><span>Sugar 25 kg ×6</span><span class="tabular-nums">708,000</span></div>
+              <div class="flex items-center gap-1 rounded-lg border border-dashed border-slate-400 p-2 text-[#0e5f75]"><svg class="icon size-3.5"><use href="#i-plus"/></svg>Add from catalogue</div>
+            </div>
+            <div class="mt-3 rounded-xl bg-white p-2.5 shadow-sm">
+              <div class="flex justify-between text-slate-600"><span>VAT included</span><span class="tabular-nums">180,000</span></div>
+              <div class="mt-1 flex justify-between font-bold"><span>Total</span><span class="tabular-nums">TSh 1,180,000</span></div>
+            </div>
+            <div class="mt-auto mb-3 grid grid-cols-2 gap-2">
+              <div class="rounded-xl bg-white py-2 text-center font-semibold shadow-sm">Save draft</div>
+              <div class="rounded-xl bg-teal-deep py-2 text-center font-semibold text-white">Issue</div>
+            </div>
+          </div>
+        </div>
+        <p class="mt-4 text-center font-semibold">Invoice</p>
+      </li>
+      <!-- Tax -->
+      <li class="shrink-0 snap-center" aria-roledescription="slide" aria-label="3 of 4: Tax">
+        <div class="phone" role="img" aria-label="Tax screen listing monthly VAT periods: November Open, October in Review, September and August Filed and locked.">
+          <div class="screen px-3">
+            <p class="text-sm font-bold">Tax periods</p>
+            <div class="mt-3 space-y-1.5">
+              <div class="flex items-center justify-between rounded-lg bg-white p-2.5 shadow-sm"><div><p class="font-semibold">November 2026</p><p class="text-[0.6rem] text-slate-500">VAT TSh 735,254</p></div><span class="chip chip-open">Open</span></div>
+              <div class="flex items-center justify-between rounded-lg bg-white p-2.5 shadow-sm"><div><p class="font-semibold">October 2026</p><p class="text-[0.6rem] text-slate-500">VAT TSh 912,400</p></div><span class="chip chip-review">Review</span></div>
+              <div class="flex items-center justify-between rounded-lg bg-white p-2.5 shadow-sm"><div><p class="font-semibold">September 2026</p><p class="text-[0.6rem] text-slate-500">VAT TSh 845,130</p></div><span class="chip chip-filed"><svg class="icon size-3"><use href="#i-lock"/></svg>Filed</span></div>
+              <div class="flex items-center justify-between rounded-lg bg-white p-2.5 shadow-sm"><div><p class="font-semibold">August 2026</p><p class="text-[0.6rem] text-slate-500">VAT TSh 790,870</p></div><span class="chip chip-filed"><svg class="icon size-3"><use href="#i-lock"/></svg>Filed</span></div>
+            </div>
+            <div class="mt-auto mb-3 rounded-xl bg-teal-deep py-2 text-center font-semibold text-white">Export October report (PDF)</div>
+          </div>
+        </div>
+        <p class="mt-4 text-center font-semibold">Tax</p>
+      </li>
+      <!-- Insights -->
+      <li class="shrink-0 snap-center" aria-roledescription="slide" aria-label="4 of 4: Insights">
+        <div class="phone" role="img" aria-label="Insights screen with a six-month bar chart of revenue against expenses, and totals for profit and VAT.">
+          <div class="screen px-3">
+            <p class="text-sm font-bold">Insights</p>
+            <p class="text-slate-500">Last 6 months</p>
+            <div class="mt-3 rounded-xl bg-white p-3 shadow-sm">
+              <div class="flex h-28 items-end justify-between gap-1.5">
+                <div class="flex flex-1 items-end gap-0.5"><span class="h-[55%] flex-1 rounded-t bg-teal"></span><span class="h-[30%] flex-1 rounded-t bg-slate-300"></span></div>
+                <div class="flex flex-1 items-end gap-0.5"><span class="h-[62%] flex-1 rounded-t bg-teal"></span><span class="h-[34%] flex-1 rounded-t bg-slate-300"></span></div>
+                <div class="flex flex-1 items-end gap-0.5"><span class="h-[58%] flex-1 rounded-t bg-teal"></span><span class="h-[38%] flex-1 rounded-t bg-slate-300"></span></div>
+                <div class="flex flex-1 items-end gap-0.5"><span class="h-[74%] flex-1 rounded-t bg-teal"></span><span class="h-[36%] flex-1 rounded-t bg-slate-300"></span></div>
+                <div class="flex flex-1 items-end gap-0.5"><span class="h-[86%] flex-1 rounded-t bg-teal"></span><span class="h-[40%] flex-1 rounded-t bg-slate-300"></span></div>
+                <div class="flex flex-1 items-end gap-0.5"><span class="h-[96%] flex-1 rounded-t bg-teal"></span><span class="h-[42%] flex-1 rounded-t bg-slate-300"></span></div>
+              </div>
+              <div class="mt-1.5 flex justify-between text-[0.55rem] text-slate-500"><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span></div>
+              <div class="mt-2 flex gap-3 text-[0.6rem] text-slate-600"><span class="flex items-center gap-1"><span class="size-2 rounded-sm bg-teal"></span>Revenue</span><span class="flex items-center gap-1"><span class="size-2 rounded-sm bg-slate-300"></span>Expenses</span></div>
+            </div>
+            <div class="mt-2 grid grid-cols-2 gap-2">
+              <div class="rounded-xl bg-white p-2.5 shadow-sm"><p class="text-[0.6rem] text-slate-500">Profit</p><p class="font-bold text-[#146c34] tabular-nums">▲ 2,310,000</p></div>
+              <div class="rounded-xl bg-white p-2.5 shadow-sm"><p class="text-[0.6rem] text-slate-500">VAT owed</p><p class="font-bold tabular-nums">735,254</p></div>
+            </div>
+          </div>
+        </div>
+        <p class="mt-4 text-center font-semibold">Insights</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 6. Testimonials ============ -->
+<!-- PLACEHOLDER: replace with real customer quotes, used with permission, before launch -->
+<section aria-labelledby="quotes-title" class="border-y border-line bg-surface py-16 md:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <p class="eyebrow">From business owners</p>
+    <h2 id="quotes-title" class="mt-3 text-3xl sm:text-4xl">Trusted from Dar to Zanzibar.</h2>
+    <div class="mt-10 grid gap-4 md:grid-cols-3">
+      <figure class="card flex flex-col bg-bg p-6">
+        <blockquote class="flex-1 text-lg">“I used to spend two days every month adding up receipt books. Now I open NgomeBiz, check the report, and I’m done.”</blockquote>
+        <figcaption class="mt-6 flex items-center gap-3">
+          <span class="grid size-10 place-items-center rounded-full bg-cyan/15 font-bold text-accent" aria-hidden="true">AM</span>
+          <span><span class="block font-semibold">Asha M.</span><span class="block text-sm text-muted">Hardware shop, Dar es Salaam</span></span>
+        </figcaption>
+      </figure>
+      <figure class="card flex flex-col bg-bg p-6">
+        <blockquote class="flex-1 text-lg">“Clients take me more seriously with a proper PDF invoice. I send it on WhatsApp before I’ve even left the meeting.”</blockquote>
+        <figcaption class="mt-6 flex items-center gap-3">
+          <span class="grid size-10 place-items-center rounded-full bg-gold/25 font-bold text-gold-fg" aria-hidden="true">BK</span>
+          <span><span class="block font-semibold">Baraka K.</span><span class="block text-sm text-muted">Freelance designer, Arusha</span></span>
+        </figcaption>
+      </figure>
+      <figure class="card flex flex-col bg-bg p-6">
+        <blockquote class="flex-1 text-lg">“My phone fell in a bucket of water. New phone, same login, every invoice still there. That sold me.”</blockquote>
+        <figcaption class="mt-6 flex items-center gap-3">
+          <span class="grid size-10 place-items-center rounded-full bg-gain/20 font-bold text-gain-fg" aria-hidden="true">SH</span>
+          <span><span class="block font-semibold">Salma H.</span><span class="block text-sm text-muted">Wholesaler, Zanzibar</span></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. Pricing ============ -->
+<section id="pricing" aria-labelledby="pricing-title" class="py-16 md:py-24">
+  <div class="mx-auto max-w-3xl px-4 text-center sm:px-6">
+    <p class="eyebrow">Pricing</p>
+    <h2 id="pricing-title" class="mt-3 text-3xl sm:text-4xl">Free during early access.</h2>
+    <p class="mx-auto mt-4 max-w-xl text-lg text-muted">Every feature, no card needed. Join now and help shape NgomeBiz.</p>
+
+    <div class="relative mt-10 overflow-hidden rounded-[var(--radius-surface)] border border-gold/60 bg-surface p-6 text-left shadow-xl sm:p-8">
+      <div aria-hidden="true" class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-gold via-[#e9c975] to-gold"></div>
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <span class="chip bg-gold/25 text-gold-fg">Early access</span>
+          <p class="mt-3 text-4xl font-bold">TSh 0 <span class="text-base font-normal text-muted">/ month</span></p>
+        </div>
+        <a href="#download" class="btn-primary">Download free <svg class="icon size-5" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <ul class="mt-6 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+        <li class="flex gap-2"><svg class="icon size-5 text-gain-fg" aria-hidden="true"><use href="#i-check"/></svg>Unlimited invoices and PDFs</li>
+        <li class="flex gap-2"><svg class="icon size-5 text-gain-fg" aria-hidden="true"><use href="#i-check"/></svg>VAT and tax period tracking</li>
+        <li class="flex gap-2"><svg class="icon size-5 text-gain-fg" aria-hidden="true"><use href="#i-check"/></svg>Mobile money, cash and bank payments</li>
+        <li class="flex gap-2"><svg class="icon size-5 text-gain-fg" aria-hidden="true"><use href="#i-check"/></svg>Stock, clients and products</li>
+        <li class="flex gap-2"><svg class="icon size-5 text-gain-fg" aria-hidden="true"><use href="#i-check"/></svg>Expense, revenue and tax reports</li>
+        <li class="flex gap-2"><svg class="icon size-5 text-gain-fg" aria-hidden="true"><use href="#i-check"/></svg>Cloud backup and multi-device sync</li>
+      </ul>
+      <p class="mt-6 border-t border-line pt-4 text-sm text-muted">If we introduce paid plans, we’ll tell you well in advance. Your records are always yours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. FAQ ============ -->
+<section id="faq" aria-labelledby="faq-title" class="pb-16 md:pb-24">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6">
+    <p class="eyebrow">FAQ</p>
+    <h2 id="faq-title" class="mt-3 text-3xl sm:text-4xl">Questions, answered.</h2>
+    <div class="mt-8 space-y-3">
+      <details class="faq card group p-0">
+        <summary class="flex min-h-14 cursor-pointer items-center justify-between gap-4 px-5 py-4 text-lg font-semibold">Is my data safe?<svg class="faq-plus icon size-5 text-accent transition-transform" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p class="px-5 pb-5 text-muted">Your records are stored on your phone and backed up to the cloud whenever you’re online. If your phone breaks or is stolen, sign in on a new one and everything comes back. Filed tax periods are locked so they can’t be changed by accident.</p>
+      </details>
+      <details class="faq card group p-0">
+        <summary class="flex min-h-14 cursor-pointer items-center justify-between gap-4 px-5 py-4 text-lg font-semibold">Does it work without internet?<svg class="faq-plus icon size-5 text-accent transition-transform" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p class="px-5 pb-5 text-muted">Yes. Create invoices, record payments and log expenses with no connection at all. NgomeBiz syncs automatically the next time you’re online.</p>
+      </details>
+      <details class="faq card group p-0">
+        <summary class="flex min-h-14 cursor-pointer items-center justify-between gap-4 px-5 py-4 text-lg font-semibold">Is it TRA and ZRA compliant?<svg class="faq-plus icon size-5 text-accent transition-transform" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p class="px-5 pb-5 text-muted">Yes. NgomeBiz supports both VAT systems: 18% for TRA on Tanzania Mainland and 15% for ZRA in Zanzibar. It extracts VAT from gross prices line by line and rounds each line, so your totals match what the tax authority expects. It keeps every monthly period in order. You still submit your return yourself; NgomeBiz makes sure the numbers are ready.</p>
+      </details>
+      <details class="faq card group p-0">
+        <summary class="flex min-h-14 cursor-pointer items-center justify-between gap-4 px-5 py-4 text-lg font-semibold">Can my staff use it?<svg class="faq-plus icon size-5 text-accent transition-transform" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p class="px-5 pb-5 text-muted">Yes. NgomeBiz syncs across devices, so you and your team can work from the same invoices, stock and customer list on different phones.</p>
+      </details>
+      <details class="faq card group p-0">
+        <summary class="flex min-h-14 cursor-pointer items-center justify-between gap-4 px-5 py-4 text-lg font-semibold">Which countries are supported?<svg class="faq-plus icon size-5 text-accent transition-transform" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+        <p class="px-5 pb-5 text-muted">NgomeBiz is for businesses in Tanzania Mainland and Zanzibar. Invoicing, payments, stock and expenses work the same on both sides of the channel.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. Final CTA ============ -->
+<section id="download" aria-labelledby="cta-title" class="px-4 pb-16 sm:px-6 md:pb-24">
+  <div class="relative isolate mx-auto max-w-6xl overflow-hidden rounded-[var(--radius-surface)] bg-ink px-6 py-14 text-center text-white sm:px-12 md:py-20">
+    <div aria-hidden="true" class="absolute inset-0 -z-10 bg-[radial-gradient(40rem_20rem_at_50%_-20%,rgb(6_182_212/0.45),transparent_70%),radial-gradient(30rem_20rem_at_100%_120%,rgb(14_116_144/0.5),transparent_70%)]"></div>
+    <svg class="mx-auto size-14" aria-hidden="true"><use href="#logo-ngome"/></svg>
+    <h2 id="cta-title" class="mx-auto mt-6 max-w-2xl text-3xl sm:text-4xl">Build your fortress. Start invoicing today.</h2>
+    <p class="mx-auto mt-4 max-w-lg text-lg text-[#c9d6e3]">Free to download. Your first invoice takes less than a minute.</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="#" class="store-btn bg-black" data-store="ios">
+        <svg aria-hidden="true"><use href="#logo-apple"/></svg>
+        <span><small>Download on the</small><strong>App Store</strong></span>
+      </a>
+      <a href="#" class="store-btn bg-black" data-store="android">
+        <svg aria-hidden="true"><use href="#logo-play"/></svg>
+        <span><small>Get it on</small><strong>Google Play</strong></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ 10. Footer ============ -->
+<!-- TODO: replace placeholder email, WhatsApp number, legal and social URLs -->
+<footer class="border-t border-line bg-surface">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div>
+      <a href="#top" class="flex items-center gap-2 text-xl font-bold"><svg class="size-8" aria-hidden="true"><use href="#logo-ngome"/></svg>NgomeBiz</a>
+      <p class="mt-3 max-w-xs text-muted">Professional invoices and tax-ready books, from your phone. Made in Tanzania, for Tanzanian businesses.</p>
+    </div>
+    <div>
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-muted">Support</h2>
+      <ul class="mt-4 space-y-3">
+        <li><a class="inline-flex min-h-6 items-center gap-2 hover:text-accent" href="mailto:hello@ngomebiz.com"><svg class="icon size-5" aria-hidden="true"><use href="#i-mail"/></svg>hello@ngomebiz.com</a></li>
+        <li><a class="inline-flex min-h-6 items-center gap-2 hover:text-accent" href="https://wa.me/255700000000" rel="noopener"><svg class="icon size-5" aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp support</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-muted">Follow</h2>
+      <ul class="mt-4 space-y-3">
+        <li><a class="hover:text-accent" href="https://instagram.com/" rel="noopener">Instagram</a></li>
+        <li><a class="hover:text-accent" href="https://facebook.com/" rel="noopener">Facebook</a></li>
+        <li><a class="hover:text-accent" href="https://x.com/" rel="noopener">X (Twitter)</a></li>
+        <li><a class="hover:text-accent" href="https://linkedin.com/" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-line">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-6 text-sm text-muted sm:px-6">
+      <p>© <span id="year">2026</span> NgomeBiz. All rights reserved.</p>
+      <ul class="flex gap-5">
+        <li><a class="hover:text-fg" href="/privacy">Privacy policy</a></li>
+        <li><a class="hover:text-fg" href="/terms">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

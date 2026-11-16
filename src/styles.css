@@ -1,0 +1,171 @@
+@import "tailwindcss";
+@source "../site";
+
+/* Dark mode follows a .dark class on <html>, set before paint by the inline script in index.html */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Brand palette */
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-cyan: #06b6d4;
+  --color-teal: #0891b2;
+  --color-teal-deep: #0e7490;
+  --color-ink: #0b1622;
+  --color-ink-2: #13202e;
+  --color-mist: #f0f4f8;
+  --color-gain: #22c55e;
+  --color-gold: #d4a843;
+
+  --radius-card: 14px;
+  --radius-surface: 24px;
+}
+
+/* Semantic tokens that swap with the theme. All text pairs are WCAG AA on their surfaces. */
+:root {
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --surface-2: #e6edf4;
+  --fg: #0b1622;
+  --muted: #475569;
+  --line: #d5dfe9;
+  --accent: #0e7490;          /* text/links on light: 5.0:1 on --bg */
+  --accent-strong: #0e7490;   /* primary button fill */
+  --on-accent: #ffffff;
+  --gain-fg: #15803d;
+  --gold-fg: #85640f;
+  --danger-fg: #b42318;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0b1622;
+  --surface: #13202e;
+  --surface-2: #1a2a3b;
+  --fg: #e8eff6;
+  --muted: #a3b3c4;
+  --line: #24384d;
+  --accent: #22d3ee;
+  --accent-strong: #06b6d4;
+  --on-accent: #0b1622;
+  --gain-fg: #4ade80;
+  --gold-fg: #e3bf62;
+  --danger-fg: #f87171;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-on-accent: var(--on-accent);
+  --color-gain-fg: var(--gain-fg);
+  --color-gold-fg: var(--gold-fg);
+  --color-danger-fg: var(--danger-fg);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  [id] { scroll-margin-top: 5rem; }
+
+  /* Language toggle: show only the active language */
+  html:not([data-lang="sw"]) [data-l="sw"],
+  html[data-lang="sw"] [data-l="en"] { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; }
+  }
+}
+
+@layer components {
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  .eyebrow {
+    @apply text-sm font-semibold uppercase tracking-[0.14em] text-accent;
+  }
+
+  .card {
+    @apply rounded-[var(--radius-card)] border border-line bg-surface;
+  }
+
+  .icon-chip {
+    @apply grid size-11 place-items-center rounded-xl bg-cyan/12 text-accent;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-accent-strong px-5 font-semibold text-on-accent transition-colors hover:brightness-110;
+  }
+
+  /* App store badges, drawn in HTML so they stay crisp and weightless */
+  .store-btn {
+    @apply inline-flex min-h-14 items-center gap-3 rounded-xl bg-ink px-4 py-2 text-white ring-1 ring-white/15 transition-transform hover:-translate-y-0.5;
+  }
+  .store-btn svg { width: 1.6rem; height: 1.6rem; flex-shrink: 0; }
+  .store-btn small { @apply block text-[0.7rem] leading-tight opacity-85; }
+  .store-btn strong { @apply block text-lg leading-tight font-semibold; }
+
+  /* Phone mockup frame */
+  .phone {
+    @apply relative mx-auto w-[15.5rem] rounded-[2.4rem] bg-ink p-2.5 shadow-2xl ring-1 ring-white/10 sm:w-[17rem];
+    box-shadow: 0 30px 60px -20px rgb(8 145 178 / 0.35), 0 10px 25px -10px rgb(11 22 34 / 0.4);
+  }
+  .phone::before {
+    content: "";
+    @apply absolute top-4 left-1/2 z-10 h-1.5 w-14 -translate-x-1/2 rounded-full bg-ink-2;
+  }
+  .screen {
+    @apply flex aspect-[9/19] flex-col overflow-hidden rounded-[1.9rem] bg-mist pt-8 text-ink;
+    font-size: 0.72rem;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[0.65rem] font-semibold;
+  }
+  .chip-open    { @apply bg-cyan/15 text-[#0e5f75]; }
+  .chip-review  { @apply bg-gold/25 text-[#6b500a]; }
+  .chip-filed   { @apply bg-gain/20 text-[#146c34]; }
+  .chip-paid    { @apply bg-gain/20 text-[#146c34]; }
+
+  .faq summary { list-style: none; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq[open] .faq-plus { transform: rotate(45deg); }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}

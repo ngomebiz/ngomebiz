@@ -1,0 +1,17 @@
+{
+  "name": "ngomebiz-landing",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Marketing landing page for NgomeBiz, mobile invoicing for small businesses in Tanzania Mainland and Zanzibar",
+  "scripts": {
+    "dev": "tailwindcss -i src/styles.css -o site/styles.css --watch=always",
+    "build": "tailwindcss -i src/styles.css -o site/styles.css --minify && node scripts/build-og.mjs",
+    "serve": "pnpm dlx serve site"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "@tailwindcss/cli": "^4.3.5",
+    "tailwindcss": "^4.3.5"
+  },
+  "packageManager": "pnpm@10.4.1"
+}
